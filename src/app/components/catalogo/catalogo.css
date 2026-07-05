@@ -44,11 +44,27 @@
     border-top: 1px solid rgba(0, 0, 0, 0.05);
 }
 
+
+/* --- NUEVA CONFIGURACIÓN ADAPTATIVA PARA LA RECILLA DE MANGAS --- */
+
 .mangas-grid {
     display: grid !important;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)) !important;
-    gap: 30px !important;
-    padding: 20px 0 60px 0;
+    /* En celulares: fuerza 2 columnas usando un mínimo de 140px por tarjeta */
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)) !important;
+    gap: 16px !important;
+    /* Gaps un poco más compactos para que no roben espacio en móvil */
+    padding: 10px 0 60px 0;
+}
+
+
+/* En pantallas de computadoras y tablets grandes (desde 768px en adelante) */
+
+@media (min-width: 768px) {
+    .mangas-grid {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)) !important;
+        gap: 30px !important;
+        padding: 20px 0 60px 0;
+    }
 }
 
 

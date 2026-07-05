@@ -98,8 +98,7 @@ export class CatalogoComponent implements OnInit {
     this.carritoService.eliminarItem(index);
   }
 
-  // Proceso de Compra Seguro e Inmediato para Móviles (Android / iOS) y PC
-  // Proceso de Compra Seguro con redirección directa al chat de Instagram
+  // Proceso de Compra Adaptativo e Inteligente para Producción (Vercel)
   iniciarCompra() {
     if (this.itemsCarrito.length === 0) return;
 
@@ -109,28 +108,24 @@ export class CatalogoComponent implements OnInit {
     });
     mensaje += `\n💰 TOTAL A PAGAR: $${this.totalPagar.toFixed(2)}`;
 
-    // ENLACE DIRECTO AL CHAT: Esta ruta fuerza la apertura de la ventana de mensajes
-    const urlInstagramChat = 'https://www.instagram.com/direct/t/18037417718624546/';
-
     // Intentar API moderna de portapapeles
     if (navigator.clipboard && window.isSecureContext) {
       navigator.clipboard.writeText(mensaje)
         .then(() => {
-          this.ejecutarRedireccion(urlInstagramChat);
+          this.redireccionarInstagram();
         })
         .catch(() => {
-          this.fallbackCopiado(mensaje, urlInstagramChat);
+          this.fallbackCopiado(mensaje);
         });
     } else {
-      this.fallbackCopiado(mensaje, urlInstagramChat);
+      this.fallbackCopiado(mensaje);
     }
   }
 
-  private fallbackCopiado(texto: string, url: string) {
+  private fallbackCopiado(texto: string) {
     const textArea = document.createElement('textarea');
     textArea.value = texto;
     
-    // Estilos para que sea invisible sin romper el scroll en pantallas táctiles
     textArea.style.position = 'fixed';
     textArea.style.top = '0';
     textArea.style.left = '0';
@@ -145,7 +140,7 @@ export class CatalogoComponent implements OnInit {
     document.body.appendChild(textArea);
     textArea.focus();
     textArea.select();
-    textArea.setSelectionRange(0, 99999); // Requisito estricto para iOS / Safari
+    textArea.setSelectionRange(0, 99999);
 
     try {
       document.execCommand('copy');
@@ -154,11 +149,28 @@ export class CatalogoComponent implements OnInit {
     }
 
     document.body.removeChild(textArea);
-    this.ejecutarRedireccion(url);
+    this.redireccionarInstagram();
   }
 
-  private ejecutarRedireccion(url: string) {
-    alert('📋 ¡Pedido copiado al portapapeles! Al abrir Instagram, solo mantén presionado el chat y selecciona "Pegar".');
-    window.open(url, '_blank');
+  private redireccionarInstagram() {
+    alert('📋 ¡Pedido copiado al portapapeles!\n\nAl abrirse Instagram, ve a la sección de mensajes o presiona "Enviar Mensaje" en nuestro perfil y pega tu pedido. 📑');
+
+    const urlWeb = 'https://www.instagram.com/otaku.point.ec/'; 
+    const urlApp = 'instagram://user?username=otaku.point.ec'; 
+
+    const esMovil = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+    if (esMovil) {
+      // Fuerza al sistema operativo del celular a abrir la aplicación nativa en tu perfil
+      window.location.href = urlApp;
+      
+      // Respaldo por si la app tarda en cargar o no está instalada en el dispositivo
+      setTimeout(() => {
+        window.location.href = urlWeb;
+      }, 600);
+    } else {
+      // Si están navegando desde una PC/Laptop
+      window.open('https://www.instagram.com/direct/t/18037417718624546/', '_blank');
+    }
   }
 }
