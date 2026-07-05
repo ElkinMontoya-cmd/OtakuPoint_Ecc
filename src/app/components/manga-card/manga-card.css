@@ -1,0 +1,111 @@
+.manga-card {
+    background: var(--blanco-base);
+    border: 1px solid rgba(0, 0, 0, 0.07);
+    border-radius: 14px;
+    overflow: hidden;
+    position: relative;
+    transition: transform 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.manga-card:hover {
+    transform: translateY(-5px);
+}
+
+.badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    font-family: 'Space Mono', monospace;
+    font-weight: 700;
+    font-size: 11px;
+    padding: 6px 14px;
+    border-radius: 100px;
+    z-index: 10;
+}
+
+.badge.stock {
+    background: var(--negro-tinta);
+    color: var(--blanco-base);
+}
+
+.badge.preventa {
+    background: var(--rojo-otaku);
+    color: var(--blanco-base);
+}
+
+.badge.reserva {
+    background: var(--dorado-point);
+    color: var(--negro-tinta);
+}
+
+.portada-wrapper {
+    height: 350px;
+    /* <--- Bajamos a 350px para hacerla más pequeña y estilizada */
+    overflow: hidden;
+    background-color: var(--hueso);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.manga-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* <--- Al tener la medida exacta de la columna, llena la card sin recortes drásticos */
+    object-position: top center;
+}
+
+.manga-info {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.manga-titulo {
+    font-family: 'Anton', sans-serif;
+    font-size: 22px;
+    margin: 0 0 12px 0;
+}
+
+.generos-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+}
+
+.genero-tag {
+    font-size: 11px;
+    background: var(--hueso);
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+.manga-footer {
+    margin-top: auto;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btn-detalles {
+    background: var(--rojo-otaku);
+    color: white;
+    border: none;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+    padding: 12px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 100%;
+    transition: background 0.2s;
+}
+
+.btn-detalles:hover {
+    background: var(--rojo-oscuro);
+}

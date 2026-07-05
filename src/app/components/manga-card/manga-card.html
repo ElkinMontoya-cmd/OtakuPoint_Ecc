@@ -1,0 +1,27 @@
+<div class="card h-100 manga-card shadow-sm">
+    <!-- Etiqueta de Estado -->
+    <span class="badge" [ngClass]="manga.estado.toLowerCase()">
+    {{ manga.estado }}
+  </span>
+
+    <!-- Contenedor de la Portada -->
+    <div class="portada-wrapper">
+        <img [src]="manga.portadaUrl" [alt]="manga.titulo" class="manga-img">
+    </div>
+
+    <!-- Información -->
+    <div class="manga-info">
+        <h3 class="manga-titulo text-uppercase">{{ manga.titulo }}</h3>
+
+        <div class="generos-tags">
+            <span *ngFor="let g of manga.generos" class="genero-tag">{{ g }}</span>
+        </div>
+
+        <div class="manga-footer">
+            <!-- Corregido el evento click para levantar el modal -->
+            <button (click)="verDetalles()" class="btn-detalles">
+        Ver detalles
+      </button>
+        </div>
+    </div>
+</div>

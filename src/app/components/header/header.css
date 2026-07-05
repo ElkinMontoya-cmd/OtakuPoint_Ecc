@@ -1,0 +1,40 @@
+.main-header {
+    background-color: var(--negro-tinta);
+    border-bottom: 6px solid var(--rojo-otaku);
+    padding: 20px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 5px solid var(--rojo-otaku);
+}
+
+.brand-title {
+    font-family: 'Anton', sans-serif;
+    color: var(--blanco-base);
+    font-size: 28px;
+    letter-spacing: 1px;
+    margin: 0;
+}
+
+.brand-title span {
+    color: var(--rojo-otaku);
+}
+
+.brand-title small {
+    font-family: 'Space Mono', monospace;
+    font-size: 14px;
+    color: var(--dorado-point);
+    vertical-align: super;
+}

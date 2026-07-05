@@ -1,0 +1,22 @@
+<div class="filtros-panel">
+    <!-- Buscador por texto en tiempo real -->
+    <div class="input-group">
+        <input type="text" [(ngModel)]="buscarTexto" (input)="notificarCambio()" placeholder="Buscar manga por título..." class="control-buscar" />
+    </div>
+
+    <div class="selects-group">
+        <!-- Selector dinámico de Géneros -->
+        <select [(ngModel)]="generoSeleccionado" (change)="notificarCambio()" class="control-select">
+      <option value="">Todos los géneros</option>
+      <option *ngFor="let g of generos" [value]="g">{{ g }}</option>
+    </select>
+
+        <!-- Selector de Estados del manual de marca -->
+        <select [(ngModel)]="estadoSeleccionado" (change)="notificarCambio()" class="control-select">
+      <option value="">Todos los estados</option>
+      <option value="STOCK">STOCK</option>
+      <option value="PREVENTA">PREVENTA</option>
+      <option value="RESERVA">RESERVA</option>
+    </select>
+    </div>
+</div>

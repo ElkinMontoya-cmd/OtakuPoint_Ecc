@@ -1,0 +1,372 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(20, 20, 20, 0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 20px;
+}
+
+.modal-content {
+    background: var(--blanco-base);
+    border-radius: 18px;
+    width: 100%;
+    max-width: 1050px;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    padding: 40px;
+    border-top: 8px solid var(--rojo-otaku);
+}
+
+.btn-cerrar {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: transparent;
+    border: none;
+    font-size: 35px;
+    cursor: pointer;
+    color: var(--gris-trazo);
+}
+
+.btn-cerrar:hover {
+    color: var(--rojo-otaku);
+}
+
+.manga-detalle-header {
+    display: flex;
+    gap: 35px;
+    margin-bottom: 40px;
+}
+
+.detalle-portada-principal {
+    position: relative;
+    width: 220px;
+    flex-shrink: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    background-color: var(--hueso);
+    cursor: zoom-in;
+    transition: opacity 0.2s;
+}
+
+.detalle-portada-principal:hover {
+    opacity: 0.9;
+}
+
+.detalle-portada-principal img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.kicker-modal {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--rojo-otaku);
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.detalle-titulo {
+    font-family: 'Anton', sans-serif;
+    font-size: 42px;
+    letter-spacing: 1px;
+    margin: 0 0 16px 0;
+    line-height: 1;
+}
+
+
+/* --- ESTILOS PARA EL AUTOR --- */
+
+.detalle-autor {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    color: var(--gris-trazo);
+    margin: -10px 0 18px 0;
+    /* Lo pega estéticamente al título */
+    font-weight: 500;
+}
+
+.detalle-autor span {
+    color: var(--negro-tinta);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.detalle-sinopsis {
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    color: #444;
+    line-height: 1.6;
+    margin-bottom: 24px;
+}
+
+.tags-genero {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.tag-g {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    background: var(--hueso);
+    padding: 5px 12px;
+    border-radius: 4px;
+    color: var(--negro-tinta);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+
+/* --- ESTILOS PARA EL TIPO DE PUBLICACIÓN --- */
+
+
+/* --- ESTILOS PARA EL TIPO DE PUBLICACIÓN (DESTACADO) --- */
+
+.tag-publicacion {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    background-color: var(--rojo-otaku);
+    /* Fondo rojo de la tienda */
+    color: #ffffff;
+    /* Texto blanco para alto contraste */
+    padding: 5px 12px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    /* Opcional: le da un toque más técnico/badge */
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 6px rgba(225, 29, 72, 0.2);
+    /* Sutil brillo rojo para darle vida */
+}
+
+.subtitulo-tomos {
+    font-family: 'Anton', sans-serif;
+    font-size: 26px;
+    margin: 0 0 24px 0;
+}
+
+.tomos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 20px;
+}
+
+.tomo-item {
+    position: relative;
+    background: var(--blanco-base);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease;
+}
+
+.tomo-item:hover {
+    transform: translateY(-4px);
+}
+
+.tomo-img-container {
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    background-color: transparent;
+    cursor: zoom-in;
+    display: block;
+}
+
+.tomo-img-container img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+.tomo-img-container:hover {
+    opacity: 0.9;
+}
+
+.tomo-info {
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    background: var(--blanco-base);
+}
+
+.tomo-numero {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.tomo-precio {
+    font-family: 'Space Mono', monospace;
+    font-size: 14px;
+    color: var(--rojo-otaku);
+    font-weight: 700;
+}
+
+
+/* --- BADGES (ESTADOS) --- */
+
+.tomo-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 10;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 50px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    text-transform: uppercase;
+}
+
+.badge-detalle {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    z-index: 10;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 5px 12px;
+    border-radius: 100px;
+    text-transform: uppercase;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.tomo-badge.stock,
+.badge-detalle.stock {
+    background-color: var(--negro-tinta) !important;
+    color: white !important;
+}
+
+.tomo-badge.preventa,
+.badge-detalle.preventa {
+    background-color: var(--rojo-otaku) !important;
+    color: white !important;
+}
+
+.tomo-badge.reserva,
+.badge-detalle.reserva {
+    background-color: var(--dorado-point) !important;
+    color: var(--negro-tinta) !important;
+}
+
+
+/* --- ESTILOS DEL LIGHTBOX VISOR --- */
+
+.visor-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(10, 10, 10, 0.95);
+    z-index: 2000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeInVisor 0.25s ease-out;
+}
+
+.visor-imagen-activa {
+    max-width: 90%;
+    max-height: 85vh;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+    animation: scaleInImg 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.visor-cerrar {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: #ffffff;
+    font-size: 50px;
+    font-weight: 300;
+    cursor: pointer;
+    user-select: none;
+}
+
+.visor-cerrar:hover {
+    color: var(--rojo-otaku);
+}
+
+@keyframes fadeInVisor {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes scaleInImg {
+    from {
+        transform: scale(0.92);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@media(max-width: 650px) {
+    .manga-detalle-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .tags-genero {
+        justify-content: center;
+    }
+    .modal-content {
+        padding: 24px;
+    }
+}
+
+
+/* --- ESTILO PARA EL BOTÓN DE LOS TOMOS DENTRO DEL DETALLE --- */
+
+.btn-add-carrito {
+    width: 100%;
+    background-color: var(--negro-tinta);
+    color: #ffffff;
+    border: none;
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    outline: none;
+    /* Quita los estilos nativos de botones en iPhone */
+}
+
+.btn-add-carrito:hover {
+    background-color: var(--rojo-otaku);
+}
+
+.btn-add-carrito:active {
+    transform: scale(0.98);
+}

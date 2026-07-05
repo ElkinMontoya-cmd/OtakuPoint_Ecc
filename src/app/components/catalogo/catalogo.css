@@ -1,0 +1,426 @@
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 40px 10px;
+}
+
+.kicker-seccion {
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 3px;
+    color: var(--rojo-otaku);
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.titulo-seccion {
+    font-family: 'Anton', sans-serif;
+    font-size: 34px;
+    margin-bottom: 20px;
+}
+
+.catalogo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 24px;
+    margin-top: 20px;
+}
+
+.no-resultados {
+    text-align: center;
+    padding: 40px;
+    color: var(--gris-trazo);
+    font-style: italic;
+}
+
+.brand-footer {
+    text-align: center;
+    margin-top: 80px;
+    padding: 24px;
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    color: #999;
+    letter-spacing: 2px;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.mangas-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)) !important;
+    gap: 30px !important;
+    padding: 20px 0 60px 0;
+}
+
+
+/* --- CAPAS DE ACCESIBILIDAD Y CONTROL DE ALTURA --- */
+
+.carrito-wrapper {
+    position: relative;
+    z-index: 99999 !important;
+}
+
+
+/* --- ESTRUCTURA DE LA SIDEBAR DEL CARRITO --- */
+
+.carrito-sidebar {
+    position: fixed;
+    top: 0;
+    right: -450px;
+    /* Se esconde fuera de la pantalla */
+    width: 100%;
+    max-width: 420px;
+    height: 100vh;
+    height: 100dvh;
+    background: #ffffff;
+    z-index: 99999 !important;
+    box-shadow: -5px 0 25px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    transition: right 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    font-family: 'Poppins', sans-serif;
+}
+
+.carrito-sidebar.open {
+    right: 0 !important;
+    /* Despliega la barra lateral */
+}
+
+
+/* --- FONDO OSCURO DETRÁS DEL CARRITO --- */
+
+.carrito-sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 99998 !important;
+}
+
+
+/* --- HEADER INTERNO DEL CARRITO --- */
+
+.carrito-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid #f0f0f0;
+    background: #ffffff;
+}
+
+.carrito-header h3 {
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--negro-tinta);
+    margin: 0;
+}
+
+.btn-cerrar-carrito {
+    background: none;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+    color: #999;
+    transition: color 0.2s;
+    line-height: 1;
+}
+
+.btn-cerrar-carrito:hover {
+    color: var(--rojo-otaku);
+}
+
+
+/* --- CONTENEDOR INTERNO DE ITEMS (SCROLL) --- */
+
+.carrito-items-container {
+    flex: 1;
+    overflow-y: auto;
+    padding: 15px;
+    background-color: #fafafa;
+    -webkit-overflow-scrolling: touch;
+}
+
+
+/* --- FILAS DE PRODUCTOS INDIVIDUALEZ (ESTILO PREMIUM COMPACTO) --- */
+
+.carrito-item {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    margin-bottom: 10px;
+    background: #ffffff;
+    border: 1px solid #eef2f6;
+    border-radius: 6px;
+    gap: 12px;
+    transition: box-shadow 0.2s;
+}
+
+.carrito-item:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+
+/* Miniatura Fija */
+
+.item-thumb-container {
+    width: 60px;
+    min-width: 60px;
+    height: 85px;
+    overflow: hidden;
+    border-radius: 4px;
+    border: 1px solid #e2e8f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8fafc;
+}
+
+.item-thumb {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+/* Contenedor central de textos y botones */
+
+.item-detalles {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.item-titulo {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--negro-tinta);
+    margin: 0;
+    line-height: 1.3;
+}
+
+
+/* Controles de Cantidad (- 1 +) */
+
+.item-controles {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    overflow: hidden;
+    width: fit-content;
+    height: 26px;
+}
+
+.item-controles button {
+    background: #f8fafc;
+    border: none;
+    width: 26px;
+    height: 100%;
+    font-size: 14px;
+    font-weight: 600;
+    color: #64748b;
+    cursor: pointer;
+    transition: background 0.1s;
+}
+
+.item-controles button:hover {
+    background: #e2e8f0;
+    color: var(--negro-tinta);
+}
+
+.cantidad-numero {
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    min-width: 28px;
+    text-align: center;
+    color: var(--negro-tinta);
+}
+
+
+/* Sección Derecha: Precio e Icono Borrar */
+
+.item-subtotal-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
+    height: 75px;
+    min-width: 70px;
+}
+
+.item-subtotal {
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--negro-tinta);
+}
+
+.btn-eliminar {
+    background: none;
+    border: none;
+    color: #94a3b8;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s, background 0.2s;
+}
+
+.btn-eliminar:hover {
+    color: var(--rojo-otaku);
+    background: #fff1f2;
+}
+
+
+/* --- FOOTER DEL CARRITO FIJO --- */
+
+.carrito-footer {
+    background: #ffffff;
+    padding: 20px;
+    border-top: 1px solid #f0f0f0;
+}
+
+.aviso-entrega {
+    font-size: 11px;
+    color: #64748b;
+    margin-bottom: 12px;
+    line-height: 1.4;
+}
+
+.total-seccion h2 {
+    font-family: 'Space Mono', monospace;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--negro-tinta);
+    display: flex;
+    justify-content: space-between;
+    margin: 0 0 15px 0;
+}
+
+.total-seccion span {
+    color: var(--rojo-otaku);
+    /* Mantiene la estética de Otaku Point */
+}
+
+
+/* Botón Iniciar Compra Estilizado */
+
+.btn-iniciar-compra {
+    width: 100%;
+    background-color: var(--negro-tinta);
+    color: #ffffff;
+    border: none;
+    padding: 14px;
+    font-family: 'Space Mono', monospace;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-iniciar-compra:hover {
+    background-color: var(--rojo-otaku);
+}
+
+.btn-ver-mas {
+    display: block;
+    text-align: center;
+    font-size: 12px;
+    color: #64748b;
+    margin-top: 12px;
+    text-decoration: none;
+}
+
+.btn-ver-mas:hover {
+    text-decoration: underline;
+    color: var(--negro-tinta);
+}
+
+
+/* --- BOTÓN FLOTANTE DEL CARRITO --- */
+
+.carrito-flotante-btn {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background-color: var(--rojo-otaku);
+    color: white;
+    border: none;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 99999 !important;
+    box-shadow: 0 4px 20px rgba(225, 29, 72, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.2s ease;
+}
+
+.carrito-flotante-btn:hover {
+    transform: scale(1.08);
+}
+
+.carrito-flotante-btn svg {
+    color: #ffffff;
+}
+
+.badge-contador {
+    position: absolute;
+    top: -3px;
+    right: -3px;
+    background-color: var(--negro-tinta);
+    color: #ffffff;
+    border-radius: 50%;
+    min-width: 22px;
+    height: 22px;
+    padding: 0 4px;
+    font-size: 11px;
+    font-family: 'Space Mono', monospace;
+    font-weight: 700;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #ffffff;
+}
+
+
+/* --- RESPONSIVIDAD PARA CELULARES (AJUSTES MÓVILES) --- */
+
+@media (max-width: 480px) {
+    .carrito-sidebar {
+        max-width: 100%;
+        right: -100%;
+    }
+    .carrito-sidebar.open {
+        right: 0 !important;
+    }
+    .carrito-header h3 {
+        font-size: 12px;
+    }
+    .total-seccion h2 {
+        font-size: 18px;
+    }
+    .btn-iniciar-compra {
+        padding: 12px;
+        font-size: 13px;
+    }
+    .carrito-flotante-btn {
+        bottom: 20px;
+        right: 20px;
+        width: 55px;
+        height: 55px;
+    }
+}

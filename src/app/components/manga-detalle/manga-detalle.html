@@ -1,0 +1,58 @@
+<div class="modal-overlay" (click)="cerrarAlClickearFondo($event)">
+    <div class="modal-content">
+        <button class="btn-cerrar" (click)="cerrarModal()">&times;</button>
+
+        <div class="manga-detalle-header">
+
+            <!-- PORTADA PRINCIPAL (Metemos el badge aquí adentro) -->
+            <div class="detalle-portada-principal" (click)="abrirVisor(manga.portadaUrl)">
+                <!-- El badge ahora es hijo de la portada, así no se sale nunca del contenedor -->
+                <span class="badge-detalle" [ngClass]="manga.estado.toLowerCase()">
+          {{ manga.estado }}
+        </span>
+                <img [src]="manga.portadaUrl" [alt]="manga.titulo">
+            </div>
+
+            <div class="detalle-info">
+                <span class="kicker-modal">OTAKU POINT &bull; FICHA TÉCNICA</span>
+                <h2 class="detalle-titulo">{{ manga.titulo }}</h2>
+
+                <p class="detalle-autor">Por: <span>{{ manga.autor }}</span></p>
+
+                <p class="detalle-sinopsis">{{ manga.sinopsis }}</p>
+
+                <div class="tags-genero">
+                    <span class="tag-publicacion">{{ manga.tipoPublicacion }}</span>
+
+                    <span *ngFor="let g of manga.generos" class="tag-g">{{ g }}</span>
+                </div>
+            </div>
+        </div>
+        <div class="seccion-tomos">
+            <span class="kicker-modal">VOLÚMENES DISPONIBLES</span>
+            <h3 class="subtitulo-tomos">LISTA DE TOMOS</h3>
+
+            <div class="tomos-grid">
+                <div class="tomo-item" *ngFor="let tomo of manga.tomos">
+                    <span class="tomo-badge" [ngClass]="tomo.estado.toLowerCase()">{{ tomo.estado }}</span>
+                    <div class="tomo-img-container" (click)="abrirVisor(tomo.imagenUrl)">
+                        <img [src]="tomo.imagenUrl" [alt]="tomo.numero">
+                    </div>
+                    <div class="tomo-info">
+                        <span class="tomo-numero">{{ tomo.numero }}</span>
+                        <span class="tomo-precio">${{ tomo.precio.toFixed(2) }}</span>
+
+                        <button class="btn-add-carrito" (click)="agregarAlCarrito(tomo)">
+  Añadir al carrito
+</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="visor-overlay" *ngIf="imagenAmpliadaUrl" (click)="cerrarVisor()">
+    <span class="visor-cerrar">&times;</span>
+    <img [src]="imagenAmpliadaUrl" class="visor-imagen-activa" (click)="$event.stopPropagation()">
+</div>
