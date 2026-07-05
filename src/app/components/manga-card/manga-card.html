@@ -1,27 +1,40 @@
-<div class="card h-100 manga-card shadow-sm">
-    <!-- Etiqueta de Estado -->
-    <span class="badge" [ngClass]="manga.estado.toLowerCase()">
-    {{ manga.estado }}
-  </span>
+<div class="card h-100 manga-card shadow-sm" (click)="verDetalles()">
 
-    <!-- Contenedor de la Portada -->
+    <!-- Estado -->
+    <span class="badge" [ngClass]="manga.estado.toLowerCase()">
+        {{ manga.estado }}
+    </span>
+
+    <!-- Portada -->
     <div class="portada-wrapper">
         <img [src]="manga.portadaUrl" [alt]="manga.titulo" class="manga-img">
     </div>
 
     <!-- Información -->
     <div class="manga-info">
-        <h3 class="manga-titulo text-uppercase">{{ manga.titulo }}</h3>
+
+        <h3 class="manga-titulo text-uppercase">
+            {{ manga.titulo }}
+        </h3>
 
         <div class="generos-tags">
-            <span *ngFor="let g of manga.generos" class="genero-tag">{{ g }}</span>
+            <span *ngFor="let g of manga.generos" class="genero-tag">
+
+                {{ g }}
+
+            </span>
         </div>
 
         <div class="manga-footer">
-            <!-- Corregido el evento click para levantar el modal -->
-            <button (click)="verDetalles()" class="btn-detalles">
-        Ver detalles
-      </button>
+
+            <button class="btn-detalles" (click)="verDetalles(); $event.stopPropagation()">
+
+                Ver detalles
+
+            </button>
+
         </div>
+
     </div>
+
 </div>

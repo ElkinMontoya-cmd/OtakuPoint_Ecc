@@ -1,4 +1,5 @@
 import { TestBed } from '@angular/core/testing';
+import { describe, it, beforeEach, expect } from '@jest/globals';
 
 import { MangaService } from './manga';
 

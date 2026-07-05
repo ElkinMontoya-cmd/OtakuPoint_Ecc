@@ -81,9 +81,13 @@ export class CatalogoComponent implements OnInit {
     });
   }
 
-  // Modales de detalle
-  abrirDetalle(manga: Manga) { this.mangaSeleccionadoParaVer = manga; }
-  cerrarDetalle() { this.mangaSeleccionadoParaVer = null; }
+abrirDetalle(manga: Manga): void {
+  this.mangaSeleccionadoParaVer = manga;
+}
+
+cerrarDetalle(): void {
+  this.mangaSeleccionadoParaVer = null;
+}
 
   // Interacciones del Carrito
   toggleCarrito() {

@@ -10,9 +10,11 @@
         Ningún manga coincide con tus criterios.
     </div>
 
-    <div class="catalogo-grid">
-        <app-manga-card *ngFor="let manga of mangasFiltrados" [manga]="manga" (mangaSeleccionado)="abrirDetalle($event)">
-        </app-manga-card>
+    <div class="mangas-grid">
+        <div *ngFor="let manga of mangasFiltrados">
+            <app-manga-card [manga]="manga" (mangaSeleccionado)="abrirDetalle($event)">
+            </app-manga-card>
+        </div>
     </div>
 </main>
 
