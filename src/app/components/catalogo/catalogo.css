@@ -48,24 +48,24 @@
 /* --- NUEVA CONFIGURACIÓN ADAPTATIVA PARA LA RECILLA DE MANGAS --- */
 
 
-/* --- REDIS DISEÑO ADAPTATIVO MÓVIL --- */
+/* --- CONFIGURACIÓN DE RECILLA ULTRA-COMPACTA (3 COLUMNAS EN MÓVIL) --- */
 
 .mangas-grid {
     display: grid !important;
-    /* Usamos auto-fit en lugar de auto-fill y reducimos el mínimo a 130px */
-    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)) !important;
-    gap: 12px !important;
-    /* Espaciado más compacto y estético para móviles */
-    padding: 10px 8px 60px 8px !important;
+    /* Fuerza exactamente 3 columnas del mismo tamaño en pantallas móviles */
+    grid-template-columns: repeat(3, 1fr) !important;
+    /* Reducimos los espacios al mínimo para optimizar la pantalla del celular */
+    gap: 8px !important;
+    padding: 10px 6px 60px 6px !important;
     width: 100% !important;
     box-sizing: border-box !important;
 }
 
 
-/* 🚨 ¡ESTO ES LO MÁS IMPORTANTE! 🚨
-   Fuerza al componente hijo de Angular a no desbordarse ni medir más que su columna */
+/* 🚨 REQUISITO OBLIGATORIO: Fuerza a las tarjetas de Angular a encogerse al ancho de la columna */
 
 .mangas-grid>* {
+    display: block !important;
     width: 100% !important;
     min-width: 0 !important;
     max-width: 100% !important;
@@ -73,13 +73,55 @@
 }
 
 
-/* En pantallas de computadoras y tablets grandes (desde 768px en adelante) */
+/* --- AJUSTES INTERNOS PARA QUE EL TEXTO Y BOTÓN NO SE ROMPAN EN 3 COLUMNAS --- */
+
+
+/* (Ajusta estas clases según los nombres reales que tengas en tu manga-card) */
+
+.mangas-grid .item-titulo,
+.mangas-grid h3,
+.mangas-grid .titulo-manga {
+    font-size: 11px !important;
+    /* Texto más pequeño para que no se desborde */
+    line-height: 1.2 !important;
+    margin: 4px 0 !important;
+}
+
+.mangas-grid button,
+.mangas-grid .btn-ver-mas,
+.mangas-grid .btn-detalle {
+    font-size: 10px !important;
+    /* Botón ultra compacto */
+    padding: 6px 4px !important;
+    width: 100% !important;
+}
+
+.mangas-grid .badge,
+.mangas-grid .tag {
+    font-size: 9px !important;
+    /* Etiquetas de género o "Reserva" más pequeñas */
+    padding: 2px 4px !important;
+}
+
+
+/* --- VISTA PARA COMPUTADORAS (DE VUELTA A LA NORMALIDAD) --- */
 
 @media (min-width: 768px) {
     .mangas-grid {
+        /* En pantallas grandes mantiene tu diseño original de tarjetas grandes */
         grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)) !important;
-        gap: 30px !important;
+        gap: 24px !important;
         padding: 20px 0 60px 0 !important;
+    }
+    /* Restaurar tamaños normales en PC */
+    .mangas-grid .item-titulo,
+    .mangas-grid h3,
+    .mangas-grid .titulo-manga {
+        font-size: 14px !important;
+    }
+    .mangas-grid button {
+        font-size: 13px !important;
+        padding: 10px !important;
     }
 }
 
