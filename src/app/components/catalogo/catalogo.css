@@ -47,13 +47,29 @@
 
 /* --- NUEVA CONFIGURACIÓN ADAPTATIVA PARA LA RECILLA DE MANGAS --- */
 
+
+/* --- REDIS DISEÑO ADAPTATIVO MÓVIL --- */
+
 .mangas-grid {
     display: grid !important;
-    /* En celulares: fuerza 2 columnas usando un mínimo de 140px por tarjeta */
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)) !important;
-    gap: 16px !important;
-    /* Gaps un poco más compactos para que no roben espacio en móvil */
-    padding: 10px 0 60px 0;
+    /* Usamos auto-fit en lugar de auto-fill y reducimos el mínimo a 130px */
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)) !important;
+    gap: 12px !important;
+    /* Espaciado más compacto y estético para móviles */
+    padding: 10px 8px 60px 8px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+
+/* 🚨 ¡ESTO ES LO MÁS IMPORTANTE! 🚨
+   Fuerza al componente hijo de Angular a no desbordarse ni medir más que su columna */
+
+.mangas-grid>* {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
 }
 
 
@@ -61,9 +77,9 @@
 
 @media (min-width: 768px) {
     .mangas-grid {
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)) !important;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)) !important;
         gap: 30px !important;
-        padding: 20px 0 60px 0;
+        padding: 20px 0 60px 0 !important;
     }
 }
 
