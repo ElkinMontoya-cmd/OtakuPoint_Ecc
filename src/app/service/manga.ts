@@ -791,8 +791,7 @@ export class MangaService {
       { numero: 'Volumen 2', imagenUrl: '/summertime-rendering/02.jpg', precio: 16.50, estado: 'STOCK' },
       { numero: 'Volumen 3', imagenUrl: '/summertime-rendering/03.jpg', precio: 16.50, estado: 'STOCK' },
       { numero: 'Volumen 4', imagenUrl: '/summertime-rendering/04.jpg', precio: 16.50, estado: 'STOCK' },
-      { numero: 'Volumen 5', imagenUrl: '/summertime-rendering/05.jpg', precio: 16.50, estado: 'STOCK' },
-      { numero: 'Volumen 6', imagenUrl: '/summertime-rendering/06.jpg', precio: 16.50, estado: 'STOCK' }
+      { numero: 'Volumen 5', imagenUrl: '/summertime-rendering/05.jpg', precio: 16.50, estado: 'STOCK' }
     ]
   },
   {
