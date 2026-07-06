@@ -42,4 +42,5 @@ export class MangaDetalleComponent {
   agregarAlCarrito(tomo: any) {
     this.carritoService.agregarAlCarrito(this.manga.titulo, tomo);
   }
+
 }

@@ -10,6 +10,9 @@ import { MangaCardComponent } from '../manga-card/manga-card';
 import { MangaDetalleComponent } from '../manga-detalle/manga-detalle';
 import { MangaService } from '../../service/manga';
 import { CarritoService, ItemCarrito } from '../../service/carrito';
+import { ToastComponent } from '../toast/toast';
+
+
 
 @Component({
   selector: 'app-catalogo',
@@ -19,7 +22,8 @@ import { CarritoService, ItemCarrito } from '../../service/carrito';
     HeaderComponent,
     FiltrosComponent,
     MangaCardComponent,
-    MangaDetalleComponent
+    MangaDetalleComponent,
+    ToastComponent
   ], // <-- Al agregarlos aquí, desaparece cualquier error en catalogo.html
   templateUrl: './catalogo.html',
   styleUrls: ['./catalogo.css']

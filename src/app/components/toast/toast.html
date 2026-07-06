@@ -1,1 +1,14 @@
-<p>toast works!</p>
+<div class="toast" *ngIf="toastService.toast$ | async as toast" [class.visible]="toast.visible">
+
+    <div *ngIf="toast.visible">
+
+        <img class="portada" [src]="toast.imagen" alt="Portada">
+
+        <div>
+            <h4>{{toast.titulo}}</h4>
+            <p>{{toast.mensaje}}</p>
+        </div>
+
+    </div>
+
+</div>

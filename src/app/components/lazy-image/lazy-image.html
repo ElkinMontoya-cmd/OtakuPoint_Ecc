@@ -1,0 +1,8 @@
+<div class="contenedor">
+
+    <div class="placeholder" *ngIf="!cargada">
+    </div>
+
+    <img #imagen [src]="imagenReal" [alt]="alt" (load)="onLoad()" (error)="onError()" [class.visible]="cargada">
+
+</div>

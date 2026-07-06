@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { ToastService } from './toast';
 
 export interface ItemCarrito {
   mangaTitulo: string;
@@ -29,6 +30,7 @@ export class CarritoService {
     }
     return [];
   }
+  constructor(private toastService: ToastService) {}
 
   // 4. Método auxiliar para guardar el estado actual en el localStorage
   private guardarEnLocalStorage() {
@@ -38,6 +40,9 @@ export class CarritoService {
   }
 
   agregarAlCarrito(mangaTitulo: string, tomo: any) {
+    // 1. Validamos de forma inteligente la propiedad de la imagen para que nunca sea undefined
+    const urlFinal = tomo.imagenUrl || tomo.imagen || tomo.portada || '';
+
     const itemExistente = this.items.find(
       i => i.mangaTitulo === mangaTitulo && i.tomoNumero === tomo.numero
     );
@@ -50,12 +55,24 @@ export class CarritoService {
         tomoNumero: tomo.numero,
         precio: tomo.precio,
         cantidad: 1,
-        imagenUrl: tomo.imagenUrl
+        imagenUrl: urlFinal // <-- Usamos la URL validada
       });
     }
+    
     this.carritoSubject.next([...this.items]);
-    this.guardarEnLocalStorage(); // <-- Guarda cambios
+    this.guardarEnLocalStorage();
+    
+    console.log("Objeto Tomo recibido:", tomo);
+    console.log("URL de imagen resuelta:", urlFinal);
+    
+    // 2. Le pasamos la URL resuelta al ToastService
+    this.toastService.mostrar(
+      'Añadido al carrito',
+      `${mangaTitulo} • ${tomo.numero}`,
+      urlFinal
+    );
   }
+  
 
   actualizarCantidad(index: number, cantidad: number) {
     if (cantidad <= 0) {

@@ -1,6 +1,33 @@
 <header class="main-header">
+
     <div class="logo-container">
+
         <div class="logo-circle"></div>
-        <h1 class="brand-title">OTAKU<span> POINT</span> <small>EC</small></h1>
+
+        <h1 class="brand-title">
+            OTAKU
+            <span> POINT</span>
+            <small>EC</small>
+        </h1>
+
     </div>
+
+    <div class="header-actions">
+
+        <button class="cart-button" (click)="abrir()">
+
+            🛒
+
+            <span
+                class="cart-badge"
+                *ngIf="totalItems > 0">
+
+                {{totalItems}}
+
+            </span>
+
+        </button>
+
+    </div>
+
 </header>

@@ -1,4 +1,6 @@
-<app-header></app-header>
+<app-header (abrirCarrito)="toggleCarrito()">
+</app-header>
+
 
 <main class="container">
     <div class="kicker-seccion">EXPLORAR</div>
@@ -18,68 +20,57 @@
     </div>
 </main>
 
-<div class="carrito-wrapper">
-    <button class="carrito-flotante-btn" (click)="toggleCarrito()">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="9" cy="21" r="1"></circle>
-            <circle cx="20" cy="21" r="1"></circle>
-            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-        </svg>
-        <span class="badge-contador" *ngIf="totalItems > 0">{{ totalItems }}</span>
-    </button>
+<div class="carrito-sidebar-overlay" *ngIf="mostrarCarrito" (click)="toggleCarrito()"></div>
+<div class="carrito-sidebar" [class.open]="mostrarCarrito">
+    <div class="carrito-header">
+        <h3>PRODUCTO</h3>
+        <h3>SUBTOTAL</h3>
+        <button class="btn-cerrar-carrito" (click)="toggleCarrito()">&times;</button>
+    </div>
 
-    <div class="carrito-sidebar-overlay" *ngIf="mostrarCarrito" (click)="toggleCarrito()"></div>
-    <div class="carrito-sidebar" [class.open]="mostrarCarrito">
-        <div class="carrito-header">
-            <h3>PRODUCTO</h3>
-            <h3>SUBTOTAL</h3>
-            <button class="btn-cerrar-carrito" (click)="toggleCarrito()">&times;</button>
-        </div>
+    <div class="carrito-items-container">
+        <div class="carrito-item" *ngFor="let item of itemsCarrito; let i = index">
+            <div class="item-thumb-container">
+                <img [src]="item.imagenUrl" [alt]="item.tomoNumero" class="item-thumb">
+            </div>
 
-        <div class="carrito-items-container">
-            <div class="carrito-item" *ngFor="let item of itemsCarrito; let i = index">
-                <div class="item-thumb-container">
-                    <img [src]="item.imagenUrl" [alt]="item.tomoNumero" class="item-thumb">
-                </div>
+            <div class="item-detalles">
+                <p class="item-titulo">{{ item.mangaTitulo }} ({{ item.tomoNumero }})</p>
 
-                <div class="item-detalles">
-                    <p class="item-titulo">{{ item.mangaTitulo }} ({{ item.tomoNumero }})</p>
-
-                    <div class="item-controles">
-                        <button class="btn-cantidad" (click)="cambiarCantidad(i, item.cantidad - 1)">-</button>
-                        <span class="cantidad-numero">{{ item.cantidad }}</span>
-                        <button class="btn-cantidad" (click)="cambiarCantidad(i, item.cantidad + 1)">+</button>
-                    </div>
-                </div>
-
-                <div class="item-subtotal-container">
-                    <span class="item-subtotal">${{ (item.precio * item.cantidad).toFixed(2) }}</span>
-                    <button class="btn-eliminar" (click)="eliminarItem(i)" title="Eliminar producto">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="3 6 5 6 21 6"></polyline>
-                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                    <line x1="10" y1="11" x2="10" y2="17"></line>
-                    <line x1="14" y1="11" x2="14" y2="17"></line>
-                </svg>
-            </button>
+                <div class="item-controles">
+                    <button class="btn-cantidad" (click)="cambiarCantidad(i, item.cantidad - 1)">-</button>
+                    <span class="cantidad-numero">{{ item.cantidad }}</span>
+                    <button class="btn-cantidad" (click)="cambiarCantidad(i, item.cantidad + 1)">+</button>
                 </div>
             </div>
-        </div>
 
-        <div class="carrito-footer">
-            <p class="aviso-entrega">El tiempo de entrega <strong>no considera feriados</strong>.</p>
-            <div class="total-seccion">
-                <h2>Total: <span>${{ totalPagar.toFixed(2) }}</span></h2>
+            <div class="item-subtotal-container">
+                <span class="item-subtotal">${{ (item.precio * item.cantidad).toFixed(2) }}</span>
+                <button class="btn-eliminar" (click)="eliminarItem(i)" title="Eliminar producto">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="3 6 5 6 21 6"></polyline>
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                        <line x1="10" y1="11" x2="10" y2="17"></line>
+                        <line x1="14" y1="11" x2="14" y2="17"></line>
+                    </svg>
+                </button>
             </div>
-            <button class="btn-iniciar-compra" (click)="iniciarCompra()">
-                INICIAR COMPRA
-            </button>
-            <a href="#" class="btn-ver-mas" (click)="toggleCarrito(); $event.preventDefault()">Ver más productos</a>
         </div>
+    </div>
+
+    <div class="carrito-footer">
+        <p class="aviso-entrega">El tiempo de entrega <strong>no considera feriados</strong>.</p>
+        <div class="total-seccion">
+            <h2>Total: <span>${{ totalPagar.toFixed(2) }}</span></h2>
+        </div>
+        <button class="btn-iniciar-compra" (click)="iniciarCompra()">
+            INICIAR COMPRA
+        </button>
+        <a href="#" class="btn-ver-mas" (click)="toggleCarrito(); $event.preventDefault()">Ver más productos</a>
     </div>
 </div>
 
 <footer class="brand-footer">OTAKU POINT EC · 2026</footer>
 
-<app-manga-detalle *ngIf="mangaSeleccionadoParaVer" [manga]="mangaSeleccionadoParaVer" (cerrar)="cerrarDetalle()">
-</app-manga-detalle>
+<app-manga-detalle *ngIf="mangaSeleccionadoParaVer" [manga]="mangaSeleccionadoParaVer" (cerrar)="cerrarDetalle()"></app-manga-detalle>
+<app-toast></app-toast>

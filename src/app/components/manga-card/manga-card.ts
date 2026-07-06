@@ -1,6 +1,8 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Manga } from '../models/models';
+import { LazyImageComponent } from '../lazy-image/lazy-image';
+
 
 @Component({
   selector: 'app-manga-card',
