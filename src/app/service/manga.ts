@@ -769,12 +769,12 @@ export class MangaService {
       { numero: 'Volumen 7', imagenUrl: '/solo-leveling/07.jpg', precio: 28.00, estado: 'STOCK' },
       { numero: 'Volumen 8', imagenUrl: '/solo-leveling/08.jpg', precio: 28.00, estado: 'STOCK' },
       { numero: 'Volumen 9', imagenUrl: '/solo-leveling/09.jpg', precio: 28.00, estado: 'STOCK' },
-      { numero: 'Volumen 10', imagenUrl: '/solo-leveling/010.jpg', precio: 28.00, estado: 'STOCK' },
-      { numero: 'Volumen 11', imagenUrl: '/solo-leveling/011.jpg', precio: 28.00, estado: 'STOCK' },
-      { numero: 'Volumen 12', imagenUrl: '/solo-leveling/012.jpg', precio: 28.00, estado: 'STOCK' },
-      { numero: 'Volumen 13', imagenUrl: '/solo-leveling/013.jpg', precio: 28.00, estado: 'STOCK' },
-      { numero: 'Volumen 14', imagenUrl: '/solo-leveling/014.jpg', precio: 28.00, estado: 'STOCK' },
-      { numero: 'Volumen 15', imagenUrl: '/solo-leveling/015.jpg', precio: 28.00, estado: 'STOCK' }
+      { numero: 'Volumen 10', imagenUrl: '/solo-leveling/10.jpg', precio: 28.00, estado: 'STOCK' },
+      { numero: 'Volumen 11', imagenUrl: '/solo-leveling/11.jpg', precio: 28.00, estado: 'STOCK' },
+      { numero: 'Volumen 12', imagenUrl: '/solo-leveling/12.jpg', precio: 28.00, estado: 'STOCK' },
+      { numero: 'Volumen 13', imagenUrl: '/solo-leveling/13.jpg', precio: 28.00, estado: 'STOCK' },
+      { numero: 'Volumen 14', imagenUrl: '/solo-leveling/14.jpg', precio: 28.00, estado: 'STOCK' },
+      { numero: 'Volumen 15', imagenUrl: '/solo-leveling/15.jpg', precio: 28.00, estado: 'STOCK' }
     ]
   },
   {
