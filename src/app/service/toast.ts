@@ -24,7 +24,7 @@ export class ToastService {
 
   toast$ = this.toastSubject.asObservable();
 
-  mostrar(titulo: string, mensaje: string, imagen?: string) {
+  mostrar(titulo: string, mensaje: string, imagen?: string, duracion: number = 1000) {
 
     this.toastSubject.next({
       visible: true, 
@@ -44,7 +44,7 @@ export class ToastService {
         imagen: ''
       });
 
-    }, 2500);
+    }, duracion);
 
   }
   

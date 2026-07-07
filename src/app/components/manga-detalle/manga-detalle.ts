@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Manga } from '../models/models';
 import { CarritoService } from '../../service/carrito';
@@ -10,7 +10,7 @@ import { CarritoService } from '../../service/carrito';
   templateUrl: './manga-detalle.html',
   styleUrls: ['./manga-detalle.css']
 })
-export class MangaDetalleComponent {
+export class MangaDetalleComponent implements OnInit, OnDestroy {
   @Input() manga!: Manga;
   @Output() cerrar = new EventEmitter<void>();
 
@@ -18,6 +18,16 @@ export class MangaDetalleComponent {
   imagenAmpliadaUrl: string | null = null;
 
   constructor(private carritoService: CarritoService) {}
+
+  ngOnInit() {
+    // Bloquear el scroll del body cuando se abre el detalle
+    document.body.style.overflow = 'hidden';
+  }
+
+  ngOnDestroy() {
+    // Desbloquear el scroll cuando se cierra
+    document.body.style.overflow = 'auto';
+  }
 
   cerrarModal() {
     this.cerrar.emit();
