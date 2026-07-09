@@ -11,6 +11,7 @@ import { MangaDetalleComponent } from '../manga-detalle/manga-detalle';
 import { MangaService } from '../../service/manga';
 import { CarritoService, ItemCarrito } from '../../service/carrito';
 import { ToastComponent } from '../toast/toast';
+import { Loading } from '../loading/loading';
 
 
 
@@ -23,7 +24,8 @@ import { ToastComponent } from '../toast/toast';
     FiltrosComponent,
     MangaCardComponent,
     MangaDetalleComponent,
-    ToastComponent
+    ToastComponent,
+    Loading
   ], // <-- Al agregarlos aquí, desaparece cualquier error en catalogo.html
   templateUrl: './catalogo.html',
   styleUrls: ['./catalogo.css']
@@ -34,6 +36,7 @@ export class CatalogoComponent implements OnInit {
   mangasFiltrados: Manga[] = [];
   generos: string[] = [];
   mangaSeleccionadoParaVer: Manga | null = null;
+  cargando = true;
 
   // Propiedades del Carrito (Agregadas)
   mostrarCarrito = false;
@@ -49,16 +52,17 @@ export class CatalogoComponent implements OnInit {
 
   // ngOnInit Unificado
   ngOnInit(): void {
-    // Carga de mangas con ordenamiento alfabético
+    this.MangaService.cargando$().subscribe(cargando => {
+      this.cargando = cargando;
+    });
+ 
     this.MangaService.getMangas().subscribe(mangas => {
       this.todosLosMangas = mangas;
       this.mangasFiltrados = mangas;
+      this.generos = this.MangaService.getGenerosDisponibles();
       this.ordenarAlfabeticamente();
     });
-    
-    this.generos = this.MangaService.getGenerosDisponibles();
-
-    // Suscripción al carrito
+ 
     this.carritoService.items$.subscribe(items => {
       this.itemsCarrito = items;
       this.totalItems = this.carritoService.obtenerTotalItems();

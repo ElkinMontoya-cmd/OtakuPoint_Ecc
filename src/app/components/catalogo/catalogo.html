@@ -8,16 +8,23 @@
 
     <app-filtros [generos]="generos" (alCambiarFiltro)="filtrarCatalogo($event)"></app-filtros>
 
-    <div *ngIf="mangasFiltrados.length === 0" class="no-resultados">
-        Ningún manga coincide con tus criterios.
-    </div>
+    <ng-container *ngIf="!cargando; else skeletonTpl">
 
-    <div class="mangas-grid">
-        <div *ngFor="let manga of mangasFiltrados">
-            <app-manga-card [manga]="manga" (mangaSeleccionado)="abrirDetalle($event)">
-            </app-manga-card>
+        <div *ngIf="mangasFiltrados.length === 0" class="no-resultados">
+            Ningún manga coincide con tus criterios.
         </div>
-    </div>
+
+        <div class="mangas-grid">
+            <div *ngFor="let manga of mangasFiltrados">
+                <app-manga-card [manga]="manga" (mangaSeleccionado)="abrirDetalle($event)">
+                </app-manga-card>
+            </div>
+        </div>
+
+    </ng-container>
+    <ng-template #skeletonTpl>
+        <app-loading [cantidad]="8"></app-loading>
+    </ng-template>
 </main>
 
 <div class="carrito-sidebar-overlay" *ngIf="mostrarCarrito" (click)="toggleCarrito()"></div>

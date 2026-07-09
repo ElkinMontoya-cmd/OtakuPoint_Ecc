@@ -1,0 +1,13 @@
+{
+  "name": "otakupoint-migration",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Script único para migrar el catálogo hardcodeado de OtakuPoint hacia Supabase (Postgres + Storage).",
+  "scripts": {
+    "migrate": "node migrate.mjs"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.45.0",
+    "dotenv": "^16.4.5"
+  }
+}
