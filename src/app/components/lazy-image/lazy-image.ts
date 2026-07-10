@@ -1,14 +1,6 @@
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  Input,
-  OnDestroy,
-  ViewChild
-} from '@angular/core';
-
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+ 
 @Component({
   selector: 'app-lazy-image',
   standalone: true,
@@ -16,69 +8,23 @@ import { CommonModule } from '@angular/common';
   templateUrl: './lazy-image.html',
   styleUrls: ['./lazy-image.css']
 })
-export class LazyImageComponent implements AfterViewInit, OnDestroy {
-
+export class LazyImageComponent {
+ 
   @Input() src = '';
-
+ 
   @Input() alt = '';
-
-  @ViewChild('imagen')
-  imagen!: ElementRef<HTMLImageElement>;
-
-  imagenReal = '';
-
+ 
   cargada = false;
-
-  observer?: IntersectionObserver;
-
-  ngAfterViewInit(): void {
-
-    this.observer = new IntersectionObserver(
-
-      (entries) => {
-
-        entries.forEach(entry => {
-
-          if (entry.isIntersecting) {
-
-            this.imagenReal = this.src;
-
-            this.observer?.disconnect();
-
-          }
-
-        });
-
-      },
-
-      {
-        rootMargin: '300px'
-      }
-
-    );
-
-    this.observer.observe(this.imagen.nativeElement);
-
-  }
-
-  onLoad() {
-
+ 
+  error = false;
+ 
+  onLoad(): void {
     this.cargada = true;
-
   }
-
-  onError() {
-
-    this.imagenReal = '/placeholder.jpg';
-
-    this.cargada = true;
-
+ 
+  onError(): void {
+    console.error(`[lazy-image] No se pudo cargar la imagen: ${this.src}`);
+    this.error = true;
+    this.cargada = true; // oculta el skeleton, se muestra el aviso de "sin imagen"
   }
-
-  ngOnDestroy(): void {
-
-    this.observer?.disconnect();
-
-  }
-
 }

@@ -36,7 +36,7 @@
                 <div class="tomo-item" *ngFor="let tomo of manga.tomos">
                     <span class="tomo-badge" [ngClass]="tomo.estado.toLowerCase()">{{ tomo.estado }}</span>
                     <div class="tomo-img-container" (click)="abrirVisor(tomo.imagenUrl)">
-                        <img [src]="tomo.imagenUrl" [alt]="tomo.numero">
+                        <app-lazy-image [src]="tomo.imagenUrl" [alt]="tomo.numero"></app-lazy-image>
                     </div>
                     <div class="tomo-info">
                         <span class="tomo-numero">{{ tomo.numero }}</span>

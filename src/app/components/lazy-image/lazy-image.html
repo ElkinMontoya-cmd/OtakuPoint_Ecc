@@ -3,6 +3,10 @@
     <div class="placeholder" *ngIf="!cargada">
     </div>
 
-    <img #imagen [src]="imagenReal" [alt]="alt" (load)="onLoad()" (error)="onError()" [class.visible]="cargada">
+    <img *ngIf="!error" [src]="src" [alt]="alt" loading="lazy" decoding="async" (load)="onLoad()" (error)="onError()" [class.visible]="cargada">
+
+    <div class="sin-imagen" *ngIf="error">
+        <span>Sin imagen</span>
+    </div>
 
 </div>

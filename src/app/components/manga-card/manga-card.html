@@ -7,7 +7,7 @@
 
     <!-- Portada -->
     <div class="portada-wrapper">
-        <img [src]="manga.portadaUrl" [alt]="manga.titulo" class="manga-img">
+        <app-lazy-image [src]="manga.portadaUrl" [alt]="manga.titulo" class="manga-img"></app-lazy-image>
     </div>
 
     <!-- Información -->
@@ -19,18 +19,18 @@
 
         <div class="generos-tags">
             <span *ngFor="let g of manga.generos" class="genero-tag">
-
+ 
                 {{ g }}
-
+ 
             </span>
         </div>
 
         <div class="manga-footer">
 
             <button class="btn-detalles" (click)="verDetalles(); $event.stopPropagation()">
-
+ 
                 Ver detalles
-
+ 
             </button>
 
         </div>

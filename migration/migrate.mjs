@@ -80,7 +80,20 @@ const supabase = createClient(SUPABASE_URL, SERVICE_ROLE_KEY);
 
 const mangas = JSON.parse(fs.readFileSync(new URL('./mangas.json', import.meta.url)));
 
-/** Sube un archivo local (ej: /chainsawman/01.jpg) al bucket y devuelve la URL pública */
+const MIME_POR_EXTENSION = {
+  '.jpg': 'image/jpeg',
+  '.jpeg': 'image/jpeg',
+  '.png': 'image/png',
+  '.webp': 'image/webp',
+  '.gif': 'image/gif',
+};
+
+function detectarContentType(rutaArchivo) {
+  const ext = path.extname(rutaArchivo).toLowerCase();
+  return MIME_POR_EXTENSION[ext] || 'application/octet-stream';
+}
+
+/** Sube un archivo local (ej: /chainsawman/01.jpg) al bucket y devuelve la URL pública, o null si falló de verdad */
 async function subirImagen(rutaRelativa) {
   const rutaLocal = path.join(PUBLIC_DIR, rutaRelativa);
 
@@ -93,13 +106,15 @@ async function subirImagen(rutaRelativa) {
     const { error } = await supabase.storage
       .from(BUCKET)
       .upload(destino, buffer, {
-        contentType: 'image/jpeg',
+        contentType: detectarContentType(rutaLocal),
         upsert: true, // sobreescribe si ya existe -> el script se puede re-correr
+        cacheControl: '31536000', // 1 año: las portadas casi no cambian, así el navegador no las vuelve a pedir
       });
 
     if (error) {
       console.error(`  ❌ Error subiendo ${destino}:`, error.message);
       if (error.cause) console.error('     Causa:', error.cause);
+      return null; // falla real: no seguir como si nada
     }
   }
 
@@ -123,6 +138,11 @@ async function migrarManga(manga, index) {
 
   console.log('  → Subiendo portada...');
   const portadaUrl = await subirImagen(manga.portadaUrl);
+
+  if (!portadaUrl) {
+    console.error('  🛑 No se pudo subir la portada, se omite este manga por completo (no se insertó nada incompleto). Corrígelo y vuelve a correr el script.');
+    return;
+  }
 
   const { data: mangaInsertado, error: errorManga } = await supabase
     .from('mangas')
@@ -149,6 +169,10 @@ async function migrarManga(manga, index) {
   for (let i = 0; i < manga.tomos.length; i++) {
     const tomo = manga.tomos[i];
     const imagenUrl = await subirImagen(tomo.imagenUrl);
+    if (!imagenUrl) {
+      console.error(`  ⚠️  Se omite el tomo "${tomo.numero}" (falló la subida de su imagen).`);
+      continue;
+    }
     tomosPayload.push({
       manga_id: mangaInsertado.id,
       numero: tomo.numero,

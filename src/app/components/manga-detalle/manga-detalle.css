@@ -179,11 +179,18 @@
 
 .tomo-img-container {
     width: 100%;
+    aspect-ratio: 2/3;
     height: auto;
     overflow: hidden;
     background-color: transparent;
     cursor: zoom-in;
     display: block;
+}
+
+.tomo-img-container app-lazy-image {
+    display: block;
+    width: 100%;
+    height: 100%;
 }
 
 .tomo-img-container img {
