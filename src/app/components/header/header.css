@@ -51,6 +51,27 @@
 .header-actions {
     display: flex;
     align-items: center;
+    gap: 12px;
+}
+
+.theme-button {
+    width: 44px;
+    height: 44px;
+    border: none;
+    border-radius: 50%;
+    background: #232323;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    transition: .25s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.theme-button:hover {
+    background: var(--rojo-otaku);
+    transform: scale(1.08);
 }
 
 .cart-button {

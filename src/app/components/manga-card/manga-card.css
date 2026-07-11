@@ -1,7 +1,7 @@
 .manga-card {
     width: 100%;
-    background: var(--blanco-base);
-    border: 1px solid rgba(0, 0, 0, .07);
+    background: var(--superficie-tarjeta);
+    border: 1px solid var(--borde-sutil);
     border-radius: 14px;
     overflow: hidden;
     position: relative;
@@ -106,7 +106,7 @@ app-lazy-image {
 
 .genero-tag {
     font-size: 11px;
-    background: var(--hueso);
+    background: var(--superficie-elevada);
     padding: 4px 8px;
     border-radius: 4px;
 }

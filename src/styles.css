@@ -1,4 +1,5 @@
 :root {
+    /* ===== Colores de marca: NUNCA cambian con el tema ===== */
     --rojo-otaku: #C8102E;
     --rojo-oscuro: #8E0B21;
     --negro-tinta: #141414;
@@ -6,6 +7,34 @@
     --dorado-point: #F2A900;
     --blanco-base: #FFFFFF;
     --hueso: #FAFAF8;
+    /* ===== Superficies y texto: SÍ cambian con el tema ===== */
+    --superficie-pagina: var(--hueso);
+    --superficie-tarjeta: var(--blanco-base);
+    --superficie-elevada: var(--hueso);
+    /* fondos de tags/pills, un tono sobre la tarjeta */
+    --texto-principal: var(--negro-tinta);
+    --texto-secundario: #666666;
+    --texto-terciario: #999999;
+    --borde-sutil: rgba(0, 0, 0, 0.07);
+    --sombra-suave: rgba(0, 0, 0, 0.12);
+    --fondo-peligro-suave: #fff1f2;
+    --borde-input: var(--gris-trazo);
+}
+
+
+/* ===== Modo oscuro: solo tocamos superficies/texto, la marca se mantiene intacta ===== */
+
+body.tema-oscuro {
+    --superficie-pagina: #121212;
+    --superficie-tarjeta: #1E1E1E;
+    --superficie-elevada: #2A2A2A;
+    --texto-principal: #F2F2F2;
+    --texto-secundario: #B5B5B5;
+    --texto-terciario: #8A8A8A;
+    --borde-sutil: rgba(255, 255, 255, 0.08);
+    --sombra-suave: rgba(0, 0, 0, 0.5);
+    --fondo-peligro-suave: rgba(200, 16, 46, 0.18);
+    --borde-input: #555555;
 }
 
 * {
@@ -15,8 +44,9 @@
 }
 
 body {
-    background-color: var(--hueso);
+    background-color: var(--superficie-pagina);
     font-family: 'Poppins', sans-serif;
-    color: var(--negro-tinta);
+    color: var(--texto-principal);
     -webkit-font-smoothing: antialiased;
+    transition: background-color .25s ease, color .25s ease;
 }

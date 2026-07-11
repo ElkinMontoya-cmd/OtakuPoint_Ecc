@@ -16,8 +16,8 @@
 .skeleton-card {
     border-radius: 14px;
     overflow: hidden;
-    background: #fff;
-    border: 1px solid rgba(0, 0, 0, .07);
+    background: var(--superficie-tarjeta);
+    border: 1px solid var(--borde-sutil);
     display: flex;
     flex-direction: column;
 }
@@ -44,7 +44,7 @@
 
 .skeleton-portada,
 .skeleton-linea {
-    background: linear-gradient(90deg, #eee 25%, #f5f5f5 37%, #eee 63%);
+    background: linear-gradient(90deg, var(--superficie-elevada) 25%, var(--borde-sutil) 37%, var(--superficie-elevada) 63%);
     background-size: 400% 100%;
     animation: shimmer 1.4s ease infinite;
 }

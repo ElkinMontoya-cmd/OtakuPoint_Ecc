@@ -14,18 +14,23 @@
 
     <div class="header-actions">
 
+        <button class="theme-button" (click)="toggleTema()" [attr.aria-label]="oscuro ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'">
+            <span *ngIf="!oscuro">🌙</span>
+            <span *ngIf="oscuro">☀️</span>
+        </button>
+
         <button class="cart-button" (click)="abrir()">
-
+ 
             🛒
-
+ 
             <span
                 class="cart-badge"
                 *ngIf="totalItems > 0">
-
+ 
                 {{totalItems}}
-
+ 
             </span>
-
+ 
         </button>
 
     </div>

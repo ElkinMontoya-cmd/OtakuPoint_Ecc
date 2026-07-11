@@ -13,7 +13,7 @@
 }
 
 .modal-content {
-    background: var(--blanco-base);
+    background: var(--superficie-tarjeta);
     border-radius: 18px;
     width: 100%;
     max-width: 1050px;
@@ -32,7 +32,7 @@
     border: none;
     font-size: 35px;
     cursor: pointer;
-    color: var(--gris-trazo);
+    color: var(--texto-secundario);
 }
 
 .btn-cerrar:hover {
@@ -52,7 +52,7 @@
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-    background-color: var(--hueso);
+    background-color: var(--superficie-elevada);
     cursor: zoom-in;
     transition: opacity 0.2s;
 }
@@ -90,7 +90,7 @@
 .detalle-autor {
     font-family: 'Poppins', sans-serif;
     font-size: 14px;
-    color: var(--gris-trazo);
+    color: var(--texto-secundario);
     margin: -10px 0 18px 0;
     /* Lo pega estéticamente al título */
     font-weight: 500;
@@ -106,7 +106,7 @@
 .detalle-sinopsis {
     font-family: 'Poppins', sans-serif;
     font-size: 15px;
-    color: #444;
+    color: var(--texto-secundario);
     line-height: 1.6;
     margin-bottom: 24px;
 }
@@ -120,11 +120,11 @@
 .tag-g {
     font-family: 'Space Mono', monospace;
     font-size: 11px;
-    background: var(--hueso);
+    background: var(--superficie-elevada);
     padding: 5px 12px;
     border-radius: 4px;
-    color: var(--negro-tinta);
-    border: 1px solid rgba(0, 0, 0, 0.05);
+    color: var(--texto-principal);
+    border: 1px solid var(--borde-sutil);
 }
 
 
@@ -164,8 +164,8 @@
 
 .tomo-item {
     position: relative;
-    background: var(--blanco-base);
-    border: 1px solid rgba(0, 0, 0, 0.06);
+    background: var(--superficie-tarjeta);
+    border: 1px solid var(--borde-sutil);
     border-radius: 12px;
     overflow: hidden;
     display: flex;
@@ -208,7 +208,7 @@
     display: flex;
     flex-direction: column;
     gap: 4px;
-    background: var(--blanco-base);
+    background: var(--superficie-tarjeta);
 }
 
 .tomo-numero {

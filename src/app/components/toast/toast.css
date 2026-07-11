@@ -3,7 +3,7 @@
     top: 20px;
     right: 20px;
     z-index: 99999;
-    background: #fff;
+    background: var(--superficie-tarjeta);
     border-radius: 14px;
     box-shadow: 0 10px 35px rgba(0, 0, 0, .18);
     padding: 14px 18px;
@@ -36,12 +36,12 @@ h4 {
     margin: 0;
     font-size: 16px;
     font-weight: 700;
-    color: #222;
+    color: var(--texto-principal);
 }
 
 p {
     margin: 3px 0 0;
     font-size: 14px;
-    color: #666;
+    color: var(--texto-secundario);
     line-height: 1.3;
 }
