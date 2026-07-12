@@ -13,20 +13,12 @@ export class ThemeService {
   constructor() {
     const guardado = this.leerPreferenciaGuardada();
  
-    const oscuro =
-      guardado !== null
-        ? guardado
-        : window.matchMedia('(prefers-color-scheme: dark)').matches;
+    // Por defecto siempre arranca en modo claro, sin importar la
+    // preferencia del sistema operativo. Solo cambia si el usuario
+    // lo eligió manualmente antes (guardado en localStorage).
+    const oscuro = guardado !== null ? guardado : false;
  
     this.aplicar(oscuro);
- 
-    // Si el usuario nunca eligió manualmente, sigue el tema del sistema
-    // en caso de que lo cambie mientras tiene la página abierta.
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-      if (this.leerPreferenciaGuardada() === null) {
-        this.aplicar(e.matches);
-      }
-    });
   }
  
   private leerPreferenciaGuardada(): boolean | null {

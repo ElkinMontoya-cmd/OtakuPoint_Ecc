@@ -47,6 +47,13 @@
     /* Ajustamos este mínimo para que obligue a ordenarse limpiamente */
 }
 
+.selects-group app-select-personalizado {
+    display: block;
+    flex: 1;
+    min-width: 0;
+    /* Evita que el ancho se ajuste según el texto seleccionado */
+}
+
 .control-select {
     flex: 1;
     width: 100%;

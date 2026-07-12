@@ -1,0 +1,20 @@
+<div class="select-personalizado">
+
+    <button type="button" class="select-boton" (click)="toggle()" [class.abierto]="abierto">
+        <span>{{ valor || placeholder }}</span>
+        <span class="flecha" [class.rotada]="abierto">▾</span>
+    </button>
+
+    <div class="select-lista" *ngIf="abierto">
+
+        <button type="button" class="select-opcion" [class.seleccionada]="valor === ''" (click)="elegir('')">
+            {{ placeholder }}
+        </button>
+
+        <button type="button" class="select-opcion" *ngFor="let opcion of opciones" [class.seleccionada]="valor === opcion" (click)="elegir(opcion)">
+            {{ opcion }}
+        </button>
+
+    </div>
+
+</div>

@@ -97,7 +97,7 @@
 }
 
 .detalle-autor span {
-    color: var(--negro-tinta);
+    color: var(--texto-principal);
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.5px;

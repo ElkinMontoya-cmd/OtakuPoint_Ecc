@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+ 
 import { Manga } from '../models/models';
-
+ 
 // Importa los componentes hijos directamente aquí:
 import { HeaderComponent } from '../header/header';
 import { FiltrosComponent } from '../filtros/filtros';
@@ -12,9 +12,10 @@ import { MangaService } from '../../service/manga';
 import { CarritoService, ItemCarrito } from '../../service/carrito';
 import { ToastComponent } from '../toast/toast';
 import { Loading } from '../loading/loading';
-
-
-
+import { OverlayHistoryService } from '../../service/overlay-history';
+ 
+ 
+ 
 @Component({
   selector: 'app-catalogo',
   standalone: true,
@@ -37,19 +38,20 @@ export class CatalogoComponent implements OnInit {
   generos: string[] = [];
   mangaSeleccionadoParaVer: Manga | null = null;
   cargando = true;
-
+ 
   // Propiedades del Carrito (Agregadas)
   mostrarCarrito = false;
   itemsCarrito: ItemCarrito[] = [];
   totalItems = 0;
   totalPagar = 0;
-
+ 
   // Constructor Unificado
   constructor(
     private MangaService: MangaService,
-    private carritoService: CarritoService
+    private carritoService: CarritoService,
+    private overlayHistory: OverlayHistoryService
   ) {}
-
+ 
   // ngOnInit Unificado
   ngOnInit(): void {
     this.MangaService.cargando$().subscribe(cargando => {
@@ -69,7 +71,7 @@ export class CatalogoComponent implements OnInit {
       this.totalPagar = this.carritoService.obtenerTotal();
     });
   }
-
+ 
   // Lógica de Filtros
   filtrarCatalogo(filtros: { buscar: string, genero: string, estado: string }) {
     this.mangasFiltrados = this.todosLosMangas.filter(manga => {
@@ -78,48 +80,60 @@ export class CatalogoComponent implements OnInit {
       const cumpleEstado = filtros.estado === '' || manga.estado === filtros.estado;
       return cumpleBusqueda && cumpleGenero && cumpleEstado;
     });
-
+ 
     this.ordenarAlfabeticamente();
   }
-
+ 
   // Métodos de apoyo para ordenamiento
   private ordenarAlfabeticamente(): void {
     this.mangasFiltrados.sort((a, b) => {
       return a.titulo.localeCompare(b.titulo, 'es', { sensitivity: 'base' });
     });
   }
-
+ 
 abrirDetalle(manga: Manga): void {
   this.mangaSeleccionadoParaVer = manga;
+  this.overlayHistory.abrir(() => {
+    this.mangaSeleccionadoParaVer = null;
+  });
 }
-
+ 
 cerrarDetalle(): void {
   this.mangaSeleccionadoParaVer = null;
+  this.overlayHistory.cerrar();
 }
-
+ 
   // Interacciones del Carrito
   toggleCarrito() {
-    this.mostrarCarrito = !this.mostrarCarrito;
+    if (!this.mostrarCarrito) {
+      this.mostrarCarrito = true;
+      this.overlayHistory.abrir(() => {
+        this.mostrarCarrito = false;
+      });
+    } else {
+      this.mostrarCarrito = false;
+      this.overlayHistory.cerrar();
+    }
   }
-
+ 
   cambiarCantidad(index: number, nuevaCantidad: number) {
     this.carritoService.actualizarCantidad(index, nuevaCantidad);
   }
-
+ 
   eliminarItem(index: number) {
     this.carritoService.eliminarItem(index);
   }
-
+ 
   // Proceso de Compra Adaptativo e Inteligente para Producción (Vercel)
   iniciarCompra() {
     if (this.itemsCarrito.length === 0) return;
-
+ 
     let mensaje = `👋 ¡Hola Otaku Point! Quiero realizar el siguiente pedido:\n\n`;
     this.itemsCarrito.forEach(item => {
       mensaje += `🔹 ${item.mangaTitulo} (${item.tomoNumero}) x${item.cantidad} - $${(item.precio * item.cantidad).toFixed(2)}\n`;
     });
     mensaje += `\n💰 TOTAL A PAGAR: $${this.totalPagar.toFixed(2)}`;
-
+ 
     // Intentar API moderna de portapapeles
     if (navigator.clipboard && window.isSecureContext) {
       navigator.clipboard.writeText(mensaje)
@@ -133,7 +147,7 @@ cerrarDetalle(): void {
       this.fallbackCopiado(mensaje);
     }
   }
-
+ 
   private fallbackCopiado(texto: string) {
     const textArea = document.createElement('textarea');
     textArea.value = texto;
@@ -153,35 +167,32 @@ cerrarDetalle(): void {
     textArea.focus();
     textArea.select();
     textArea.setSelectionRange(0, 99999);
-
+ 
     try {
       document.execCommand('copy');
     } catch (err) {
       console.error('No se pudo copiar automáticamente', err);
     }
-
+ 
     document.body.removeChild(textArea);
     this.redireccionarInstagram();
   }
-
+ 
   private redireccionarInstagram() {
     alert('📋 ¡Pedido copiado al portapapeles!\n\nAl abrirse Instagram, ve a la sección de mensajes o presiona "Enviar Mensaje" en nuestro perfil y pega tu pedido. 📑');
-
+ 
     const urlWeb = 'https://www.instagram.com/otaku.point.ec/'; 
     const urlApp = 'instagram://user?username=otaku.point.ec'; 
-
+ 
     const esMovil = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-
+ 
     if (esMovil) {
-      // Fuerza al sistema operativo del celular a abrir la aplicación nativa en tu perfil
       window.location.href = urlApp;
       
-      // Respaldo por si la app tarda en cargar o no está instalada en el dispositivo
       setTimeout(() => {
         window.location.href = urlWeb;
       }, 600);
     } else {
-      // Si están navegando desde una PC/Laptop
       window.open('https://www.instagram.com/direct/t/18037417718624546/', '_blank');
     }
   }
